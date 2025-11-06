@@ -38,6 +38,10 @@ class Item:
         )
         connection.commit()
 
+    def open(self):
+        print("Opening item:", self.id)
+        print(self.path)
+
 
 class OwnedItem:
     def __init__(self, owned_id: str, item: Item):
@@ -66,11 +70,3 @@ class OwnedItem:
         rows = res.fetchone()
 
         return rows[0]
-
-    def open(self):
-        print("Opening item:", self.item_id)
-
-        res = cursor.execute("SELECT path FROM items WHERE id = ?", (self.item_id,))
-        path = res.fetchall()[0]
-
-        print(path)

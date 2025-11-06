@@ -75,41 +75,33 @@ def cases_menu():
 
 def items_menu():
     while True:
-        item_ids = OwnedItem.get_all()
-        items_count = len(item_ids)
+        items = OwnedItem.get_all()
+        items_count = len(items)
         rprint("\n[bold]----- Items -----[/bold]\n")
 
-        for idx, item_id in enumerate(item_ids):
-            item = OwnedItem.from_id(item_id)
+        for idx, item in enumerate(items):
 
             if item.tier == "S":
                 rprint(
-                    f"{idx+1}. [italic yellow]{item.name} ({item.item_id})[/italic yellow]"
+                    f"{idx+1}. [italic yellow]{item.name} ({item.id})[/italic yellow]"
                 )
             elif item.tier == "A":
                 rprint(
-                    f"{idx+1}. [italic magenta]{item.name} ({item.item_id})[/italic magenta]"
+                    f"{idx+1}. [italic magenta]{item.name} ({item.id})[/italic magenta]"
                 )
             elif item.tier == "B":
-                rprint(
-                    f"{idx+1}. [italic red]{item.name} ({item.item_id})[/italic red]"
-                )
+                rprint(f"{idx+1}. [italic red]{item.name} ({item.id})[/italic red]")
             elif item.tier == "C":
-                rprint(
-                    f"{idx+1}. [italic green]{item.name} ({item.item_id})[/italic green]"
-                )
+                rprint(f"{idx+1}. [italic green]{item.name} ({item.id})[/italic green]")
             elif item.tier == "D":
-                rprint(
-                    f"{idx+1}. [italic blue]{item.name} ({item.item_id})[/italic blue]"
-                )
+                rprint(f"{idx+1}. [italic blue]{item.name} ({item.id})[/italic blue]")
 
         rprint(f"{items_count + 1}. Go back")
 
         choice = int(input(f"\nChoose action (1-{items_count + 1}): "))
 
         if choice > 0 and choice <= items_count:
-            item = OwnedItem.from_id(item_ids[choice - 1])
-            item.open()
+            items[choice - 1].open()
 
         elif choice == items_count + 1:
             break
