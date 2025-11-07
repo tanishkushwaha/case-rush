@@ -1,3 +1,4 @@
+import time
 from rich import print as rprint
 from case import Case
 from item import OwnedItem
@@ -65,9 +66,18 @@ def cases_menu():
         choice = int(input(f"\nChoose action (1-{cases_count + 1}): "))
 
         if choice > 0 and choice <= cases_count:
-            item = cases[choice - 1].open()
+            case = cases[choice - 1]
 
-            rprint(f"You found 1x {rich_string(item.tier, item.name)}")
+            for t in range(5, 0, -1):
+                rprint(
+                    f"Unlocking case {case.id}... [italic]{t}s[/italic]",
+                    end="\r",
+                    flush=True,
+                )
+                time.sleep(1)
+
+            item = case.open()
+            rprint(f"\nYou found 1x {rich_string(item.tier, item.name)}")
 
         elif choice == cases_count + 1:
             break

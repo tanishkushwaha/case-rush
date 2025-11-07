@@ -59,8 +59,6 @@ class Case:
         con.commit()
 
     def open(self):
-        print("Opening case", self.id)
-
         new_owned_item_id = uuid.uuid4().hex[:4]
         new_owned_item = OwnedItem(new_owned_item_id, self.item)
         new_owned_item.save()
