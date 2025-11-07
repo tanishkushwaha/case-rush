@@ -1,10 +1,13 @@
 from menus import main_menu
-from db import cursor, connection
+from db import Database
 from utils import index_items
 
 
 def main():
     try:
+        Database.connect()
+        Database.init()
+
         index_items()
         main_menu()
 
@@ -12,8 +15,7 @@ def main():
         print("Some error occured:", e)
 
     finally:
-        cursor.close()
-        connection.close()
+        Database.close()
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-from db import cursor, connection
+from db import Database
 
 _tier_to_name = {
     "S": "Legendary Item",
@@ -7,6 +7,8 @@ _tier_to_name = {
     "C": "Uncommon Item",
     "D": "Common Item",
 }
+
+cursor, con = Database.connect()
 
 
 class Item:
@@ -36,7 +38,7 @@ class Item:
             "INSERT OR IGNORE INTO items (id, tier, path) VALUES (?, ?, ?)",
             (self.id, self.tier, self.path),
         )
-        connection.commit()
+        con.commit()
 
     def open(self):
         print("Opening item:", self.id)

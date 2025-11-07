@@ -1,6 +1,8 @@
 import random
 import uuid
-from db import connection, cursor
+from db import Database
+
+cursor, con = Database.connect()
 
 
 class Case:
@@ -23,7 +25,7 @@ class Case:
         cursor.execute(
             "INSERT INTO cases (id, item_id) VALUES (?, ?)", (case_id, item_id)
         )
-        connection.commit()
+        con.commit()
 
         return cls(id=case_id, item_id=item_id)
 
@@ -50,6 +52,6 @@ class Case:
             (uuid.uuid4().hex[:4], self.item_id),
         )
         cursor.execute("DELETE FROM cases WHERE id = ?", (self.id,))
-        connection.commit()
+        con.commit()
 
         print(f"You found a {self.item_id}!")
