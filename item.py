@@ -1,3 +1,4 @@
+from typing import List
 from db import Database
 
 _tier_to_name = {
@@ -33,6 +34,16 @@ class Item:
             id=item[0], tier=item[1], path=item[2], name=_tier_to_name.get(item[1])
         )
 
+    @classmethod
+    def get_by_tier(cls, tier: str) -> List["Item"]:
+        res = cursor.execute("SELECT * FROM items WHERE tier = ?", (tier,))
+        rows = res.fetchall()
+
+        return [
+            cls(id=item[0], tier=item[1], path=item[2], name=_tier_to_name.get(item[1]))
+            for item in rows
+        ]
+
     def save(self):
         cursor.execute(
             "INSERT OR IGNORE INTO items (id, tier, path) VALUES (?, ?, ?)",
@@ -59,8 +70,8 @@ class OwnedItem:
 
         return cls(owned_id=owned_id, item=item)
 
-    @classmethod
-    def get_all(cls):
+    @staticmethod
+    def get_all():
         res = cursor.execute("SELECT * FROM owned_items")
         rows = res.fetchall()
 
@@ -72,3 +83,9 @@ class OwnedItem:
         rows = res.fetchone()
 
         return rows[0]
+
+    def save(self):
+        cursor.execute(
+            "INSERT OR IGNORE INTO owned_items (id, item_id) VALUES (?, ?)",
+            (self.owned_id, self.item.id),
+        )

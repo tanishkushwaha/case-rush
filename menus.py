@@ -1,6 +1,7 @@
 from rich import print as rprint
 from case import Case
 from item import OwnedItem
+from utils import rich_string
 
 
 def main_menu():
@@ -30,12 +31,12 @@ def main_menu():
 
 def inventory_menu():
     while True:
-        case_ids = Case.get_all()
-        item_ids = OwnedItem.get_all()
+        cases_count = Case.get_count()
+        items_count = OwnedItem.get_count()
 
         rprint("\n[bold]----- Inventory -----[/bold]\n")
-        rprint(f"1. Cases ({len(case_ids)})")
-        rprint(f"2. Items ({len(item_ids)})")
+        rprint(f"1. Cases ({cases_count})")
+        rprint(f"2. Items ({items_count})")
         rprint("3. Go back")
 
         choice = int(input("\nChoose action (1-3): "))
@@ -52,20 +53,21 @@ def inventory_menu():
 
 def cases_menu():
     while True:
-        case_ids = Case.get_all()
-        cases_count = len(case_ids)
+        cases = Case.get_all()
+        cases_count = len(cases)
         rprint("\n[bold]----- Cases -----[/bold]\n")
 
-        for idx, case in enumerate(case_ids):
-            rprint(f"{idx + 1}. [italic]Case ({case})[/italic]")
+        for idx, case in enumerate(cases):
+            rprint(f"{idx + 1}. [italic]Case ({case.id})[/italic]")
 
         rprint(f"{cases_count + 1}. Go back")
 
         choice = int(input(f"\nChoose action (1-{cases_count + 1}): "))
 
         if choice > 0 and choice <= cases_count:
-            case = Case.from_id(case_ids[choice - 1])
-            case.open()
+            item = cases[choice - 1].open()
+
+            rprint(f"You found 1x {rich_string(item.tier, item.name)}")
 
         elif choice == cases_count + 1:
             break
@@ -80,22 +82,7 @@ def items_menu():
         rprint("\n[bold]----- Items -----[/bold]\n")
 
         for idx, item in enumerate(items):
-
-            if item.tier == "S":
-                rprint(
-                    f"{idx+1}. [italic yellow]{item.name} ({item.id})[/italic yellow]"
-                )
-            elif item.tier == "A":
-                rprint(
-                    f"{idx+1}. [italic magenta]{item.name} ({item.id})[/italic magenta]"
-                )
-            elif item.tier == "B":
-                rprint(f"{idx+1}. [italic red]{item.name} ({item.id})[/italic red]")
-            elif item.tier == "C":
-                rprint(f"{idx+1}. [italic green]{item.name} ({item.id})[/italic green]")
-            elif item.tier == "D":
-                rprint(f"{idx+1}. [italic blue]{item.name} ({item.id})[/italic blue]")
-
+            rprint(f"{idx + 1}. {rich_string(item.tier, f'{item.name} ({item.id})')}")
         rprint(f"{items_count + 1}. Go back")
 
         choice = int(input(f"\nChoose action (1-{items_count + 1}): "))

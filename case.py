@@ -1,57 +1,71 @@
 import random
+from typing import List
 import uuid
 from db import Database
+from item import Item, OwnedItem
 
 cursor, con = Database.connect()
 
 
 class Case:
-    def __init__(self, id: str, item_id: str):
+    def __init__(self, id: str, item: Item):
         self.id = id
-        self.item_id = item_id
+        self.item = item
 
     @classmethod
     def generate(cls):
         population = ["S", "A", "B", "C", "D"]
         weights = [0.02, 0.06, 0.12, 0.25, 0.5]
 
-        roll = random.choices(population=population, weights=weights)[0]
+        rolled_tier = random.choices(population=population, weights=weights)[0]
 
-        res = cursor.execute("SELECT id FROM items WHERE tier = ?", (roll))
+        items = Item.get_by_tier(rolled_tier)
+        item = random.choice(items)
 
-        item_id = random.choice(res.fetchall())[0]
-        case_id = uuid.uuid4().hex[:4]
+        new_case_id = uuid.uuid4().hex[:4]
+        new_case = cls(id=new_case_id, item=item)
+        new_case.save()
 
-        cursor.execute(
-            "INSERT INTO cases (id, item_id) VALUES (?, ?)", (case_id, item_id)
-        )
-        con.commit()
-
-        return cls(id=case_id, item_id=item_id)
+        return new_case
 
     @classmethod
-    def from_id(cls, id: str) -> "Case":
+    def from_db(cls, id: str) -> "Case":
         res = cursor.execute("SELECT item_id FROM cases WHERE id = ?", (id,))
-        item_id = res.fetchall()[0][0]
+        item_id = res.fetchone()[0]
 
-        return cls(id=id, item_id=item_id)
+        return cls(id=id, item=Item.from_db(item_id))
+
+    @classmethod
+    def get_all(cls) -> List["Case"]:
+        res = cursor.execute("SELECT * from cases")
+        rows = res.fetchall()
+
+        return [
+            cls(id=case_id, item=Item.from_db(item_id)) for case_id, item_id in rows
+        ]
 
     @staticmethod
-    def get_all():
-        res = cursor.execute("SELECT id from cases")
-        rows = res.fetchall()
-        cases = [item[0] for item in rows]
+    def get_count() -> int:
+        res = cursor.execute("SELECT COUNT(id) FROM cases")
+        rows = res.fetchone()
 
-        return cases
+        return rows[0]
+
+    def save(self):
+        cursor.execute(
+            "INSERT OR IGNORE INTO cases (id, item_id) VALUES (?, ?)",
+            (self.id, self.item.id),
+        )
+        con.commit()
 
     def open(self):
         print("Opening case", self.id)
 
-        cursor.execute(
-            "INSERT OR IGNORE INTO owned_items (id, item_id) VALUES (?, ?)",
-            (uuid.uuid4().hex[:4], self.item_id),
-        )
+        new_owned_item_id = uuid.uuid4().hex[:4]
+        new_owned_item = OwnedItem(new_owned_item_id, self.item)
+        new_owned_item.save()
+
         cursor.execute("DELETE FROM cases WHERE id = ?", (self.id,))
         con.commit()
 
-        print(f"You found a {self.item_id}!")
+        return self.item
