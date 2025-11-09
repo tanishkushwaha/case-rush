@@ -1,6 +1,6 @@
-from menus import main_menu
-from db import Database
-from utils import index_items
+from src.menus import main_menu
+from src.db import Database
+from src.utils import index_items
 
 
 def main():

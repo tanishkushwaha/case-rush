@@ -1,10 +1,10 @@
 from pathlib import Path
 import uuid
-from item import Item
+from src.models.item import Item
 
 
 def index_items():
-    base_dir = Path("./items")
+    base_dir = Path("./data/items")
     tiers = ["S", "A", "B", "C", "D"]
 
     for tier in tiers:

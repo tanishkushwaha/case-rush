@@ -1,5 +1,5 @@
 from typing import List
-from db import Database
+from src.db import Database
 
 _tier_to_name = {
     "S": "Legendary Item",

@@ -1,9 +1,9 @@
 import time
-from config import Config
+from src.config import Config
 from rich import print as rprint
-from case import Case
-from item import OwnedItem
-from utils import rich_string
+from src.models.case import Case
+from src.models.item import OwnedItem
+from src.utils import rich_string
 
 
 def main_menu():

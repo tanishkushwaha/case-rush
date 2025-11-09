@@ -1,9 +1,9 @@
 import random
 from typing import List
 import uuid
-from db import Database
-from item import Item, OwnedItem
-from config import Config
+from src.db import Database
+from src.models.item import Item, OwnedItem
+from src.config import Config
 
 cursor, con = Database.connect()
 

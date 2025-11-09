@@ -9,7 +9,7 @@ class Database:
     @classmethod
     def connect(cls) -> Tuple[sqlite3.Cursor, sqlite3.Connection]:
         if cls._connection is None:
-            cls._connection = sqlite3.connect("data.db")
+            cls._connection = sqlite3.connect("./data/data.db")
             cls._cursor = cls._connection.cursor()
 
         if cls._cursor is None:
