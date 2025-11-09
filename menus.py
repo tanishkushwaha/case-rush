@@ -1,4 +1,5 @@
 import time
+from config import Config
 from rich import print as rprint
 from case import Case
 from item import OwnedItem
@@ -86,7 +87,7 @@ def case_menu(case: Case):
         choice = int(input("Choose action (1-3): "))
 
         if choice == 1:
-            for t in range(5, 0, -1):
+            for t in range(Config.get_delays().get("case_opening") or 5, 0, -1):
                 rprint(
                     f"Opening case {case.id}... [italic]{t}s[/italic]",
                     end="\r",

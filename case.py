@@ -3,6 +3,7 @@ from typing import List
 import uuid
 from db import Database
 from item import Item, OwnedItem
+from config import Config
 
 cursor, con = Database.connect()
 
@@ -15,7 +16,7 @@ class Case:
     @classmethod
     def generate(cls):
         population = ["S", "A", "B", "C", "D"]
-        weights = [0.02, 0.06, 0.12, 0.25, 0.5]
+        weights = list(Config.get_drop_rates().values())
 
         rolled_tier = random.choices(population=population, weights=weights)[0]
 
