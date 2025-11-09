@@ -58,12 +58,15 @@ class Case:
         )
         con.commit()
 
+    def delete(self):
+        cursor.execute("DELETE FROM cases WHERE id = ?", (self.id,))
+        con.commit()
+
     def open(self):
         new_owned_item_id = uuid.uuid4().hex[:4]
         new_owned_item = OwnedItem(new_owned_item_id, self.item)
         new_owned_item.save()
 
-        cursor.execute("DELETE FROM cases WHERE id = ?", (self.id,))
-        con.commit()
+        self.delete()
 
         return self.item

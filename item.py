@@ -70,12 +70,12 @@ class OwnedItem:
 
         return cls(owned_id=owned_id, item=item)
 
-    @staticmethod
-    def get_all():
+    @classmethod
+    def get_all(cls):
         res = cursor.execute("SELECT * FROM owned_items")
         rows = res.fetchall()
 
-        return [Item.from_db(item_id) for _, item_id in rows]
+        return [cls(owned_id, Item.from_db(item_id)) for owned_id, item_id in rows]
 
     @staticmethod
     def get_count() -> int:
@@ -89,3 +89,7 @@ class OwnedItem:
             "INSERT OR IGNORE INTO owned_items (id, item_id) VALUES (?, ?)",
             (self.owned_id, self.item.id),
         )
+
+    def delete(self):
+        cursor.execute("DELETE FROM owned_items WHERE id = ?", (self.owned_id,))
+        con.commit()
