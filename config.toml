@@ -7,3 +7,4 @@ common = 0.5
 
 [delays]
 case_opening = 5
+claim_cooldown = 60

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 import tomli
 import tomli_w
 
@@ -23,7 +23,7 @@ class Config:
         return conf.get("drop_rates")
 
     @classmethod
-    def get_delays(cls) -> dict[str, int]:
+    def get_delays(cls) -> dict[Literal["case_opening", "claim_cooldown"], int]:
         conf = cls._load()
 
         return conf.get("delays")
@@ -38,7 +38,7 @@ class Config:
                 "uncommon": 0.25,
                 "common": 0.5,
             },
-            "delays": {"case_opening": 5},
+            "delays": {"case_opening": 5, "claim_cooldown": 3600},
         }
 
         with open(CONFIG_FILE_PATH, "wb") as file:
