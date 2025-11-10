@@ -3,6 +3,7 @@ from rich import print as rprint
 
 def confirm_menu(question: str) -> bool:
     while True:
+        rprint("\n[bold]----- CONFIRMATION -----[/bold]\n")
         rprint(question)
         rprint("1. [red]Yes[/red]")
         rprint("2. [green]No[/green]")

@@ -1,9 +1,9 @@
 [drop_rates]
-legendary = 0.02
+legendary = 0.2
 epic = 0.06
 rare = 0.12
 uncommon = 0.25
 common = 0.5
 
 [delays]
-case_opening = 8
+case_opening = 5

@@ -1,5 +1,6 @@
 from typing import Any
 import tomli
+import tomli_w
 
 CONFIG_FILE_PATH = "config.toml"
 
@@ -26,3 +27,19 @@ class Config:
         conf = cls._load()
 
         return conf.get("delays")
+
+    @staticmethod
+    def reset():
+        default_config: dict[str, Any] = {
+            "drop_rates": {
+                "legendary": 0.2,
+                "epic": 0.06,
+                "rare": 0.12,
+                "uncommon": 0.25,
+                "common": 0.5,
+            },
+            "delays": {"case_opening": 5},
+        }
+
+        with open(CONFIG_FILE_PATH, "wb") as file:
+            tomli_w.dump(default_config, file)

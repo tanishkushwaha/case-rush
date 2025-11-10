@@ -51,6 +51,11 @@ class Item:
         )
         con.commit()
 
+    @staticmethod
+    def delete_all():
+        cursor.execute("DELETE FROM items")
+        con.commit()
+
     def open(self):
         print("Opening item:", self.id)
         print(self.path)
@@ -92,4 +97,9 @@ class OwnedItem:
 
     def delete(self):
         cursor.execute("DELETE FROM owned_items WHERE id = ?", (self.owned_id,))
+        con.commit()
+
+    @staticmethod
+    def delete_all():
+        cursor.execute("DELETE FROM owned_items")
         con.commit()

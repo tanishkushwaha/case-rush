@@ -53,11 +53,3 @@ def export_data() -> str:
                 zipf.write(file_path, arcname)
 
     return output_name
-
-
-def reset_config():
-    pass
-
-
-def factory_reset():
-    pass

@@ -63,6 +63,11 @@ class Case:
         cursor.execute("DELETE FROM cases WHERE id = ?", (self.id,))
         con.commit()
 
+    @staticmethod
+    def delete_all():
+        cursor.execute("DELETE FROM cases")
+        con.commit()
+
     def open(self):
         new_owned_item_id = uuid.uuid4().hex[:4]
         new_owned_item = OwnedItem(new_owned_item_id, self.item)
