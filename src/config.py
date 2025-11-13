@@ -32,10 +32,10 @@ class Config:
     def reset():
         default_config: dict[str, Any] = {
             "drop_rates": {
-                "legendary": 0.2,
+                "legendary": 0.02,
                 "epic": 0.06,
                 "rare": 0.12,
-                "uncommon": 0.25,
+                "uncommon": 0.3,
                 "common": 0.5,
             },
             "delays": {"case_opening": 5, "claim_cooldown": 3600},
