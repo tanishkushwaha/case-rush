@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Rush</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+
+    .header {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .img-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      width: 100%;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      border: 1px solid black;
+      border-radius: 1rem;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="header">Inventory</h1>
+  <div class="img-grid">
+
+    {% for item in items %}
+    <div class="card">
+      <div class="metadata">
+        <h2>{{ item['obj'].name }}</h2>
+        <h4>{{ item['obj'].id }}</h4>
+      </div>
+      <div class="img-box">
+        <img src="{{ item['item_img_blob'] }}" alt="{{ item['obj'].path }}">
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+
+</html>

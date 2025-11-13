@@ -2,6 +2,7 @@ from rich import print as rprint
 
 from src.models.item import OwnedItem
 from src.utils import rich_string
+from src.menu_actions import open_web_inventory
 from .confirm_menu import confirm_menu
 
 
@@ -15,7 +16,8 @@ def items_menu():
             rprint(
                 f"{idx + 1}. {rich_string(owned_item.item.tier, f'{owned_item.item.name} ({owned_item.item.id})')}"
             )
-        rprint(f"{owned_items_count + 1}. Go back")
+        rprint(f"{owned_items_count + 1}. Open GUI")
+        rprint(f"{owned_items_count + 2}. Go back")
 
         choice = int(input(f"\nChoose action (1-{owned_items_count + 1}): "))
 
@@ -25,6 +27,14 @@ def items_menu():
             break
 
         elif choice == owned_items_count + 1:
+            success = open_web_inventory()
+
+            if not success:
+                rprint("[red]Failed opening in web browser.[/red]")
+
+            rprint("[green]Opened in web browser.[/green]")
+
+        elif choice == owned_items_count + 2:
             break
         else:
             rprint("[red]Invalid choice, try again.[/red]")

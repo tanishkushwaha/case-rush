@@ -1,8 +1,10 @@
 from pathlib import Path
 import uuid
 import os
+import subprocess
 import zipfile
 from datetime import datetime
+import base64
 
 from src.models.item import Item
 
@@ -53,3 +55,20 @@ def export_data() -> str:
                 zipf.write(file_path, arcname)
 
     return output_name
+
+
+def img_to_base64(path: str) -> str:
+    with open(path, "rb") as file:
+        encoded = base64.b64encode(file.read()).decode("utf-8")
+    return f"data:image/png;base64,{encoded}"
+
+
+def open_html_silent(path: str):
+    url = Path(path).resolve().as_uri()
+    try:
+        subprocess.Popen(
+            ["xdg-open", url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+        )
+        return True
+    except Exception:
+        return False
