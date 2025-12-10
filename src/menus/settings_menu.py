@@ -1,3 +1,7 @@
+"""
+CLI for Settings Menu.
+"""
+
 from rich import print as rprint
 
 from src.utils import export_data

@@ -13,6 +13,10 @@ cursor, con = Database.connect()
 
 
 class Item:
+    """
+    Data model for Item.
+    """
+
     def __init__(
         self,
         id: str | None = None,
@@ -62,6 +66,10 @@ class Item:
 
 
 class OwnedItem:
+    """
+    Data model for Owned Item.
+    """
+
     def __init__(self, owned_id: str, item: Item):
         self.owned_id = owned_id
         self.item = item

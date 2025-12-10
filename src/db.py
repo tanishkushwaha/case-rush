@@ -1,3 +1,7 @@
+"""
+Provides a Database class for seeding and connecting to the database.
+"""
+
 import sqlite3
 from typing import Tuple
 

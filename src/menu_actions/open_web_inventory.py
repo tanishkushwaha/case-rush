@@ -6,6 +6,12 @@ from src.utils import img_to_base64, open_html_silent
 
 
 def open_web_inventory() -> bool:
+    """
+    Injects owned items into the html template and calls open_html_silent function.
+
+    :return: Success
+    :rtype: bool
+    """
     env = Environment(loader=FileSystemLoader("templates"))
 
     template = env.get_template("inventory.html")

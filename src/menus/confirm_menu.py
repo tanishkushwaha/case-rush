@@ -1,3 +1,7 @@
+"""
+CLI for confirmation menu.
+"""
+
 from rich import print as rprint
 
 

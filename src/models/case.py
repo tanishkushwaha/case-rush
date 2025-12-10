@@ -9,6 +9,10 @@ cursor, con = Database.connect()
 
 
 class Case:
+    """
+    Data model for Case.
+    """
+
     def __init__(self, id: str, item: Item):
         self.id = id
         self.item = item

@@ -1,3 +1,7 @@
+"""
+Provides a Config class for loading and accessing values from config.toml.
+"""
+
 from typing import Any, Literal
 import tomli
 import tomli_w

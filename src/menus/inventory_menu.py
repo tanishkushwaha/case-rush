@@ -1,3 +1,7 @@
+"""
+CLI for Inventory Menu.
+"""
+
 from rich import print as rprint
 
 from src.models.case import Case

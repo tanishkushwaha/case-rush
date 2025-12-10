@@ -1,3 +1,7 @@
+"""
+Provides helper functions.
+"""
+
 from pathlib import Path
 import uuid
 import os
@@ -10,6 +14,10 @@ from src.models.item import Item
 
 
 def index_items():
+    """
+    Indexes items present in the base_dir to the database.
+    """
+
     base_dir = Path("./data/items")
     tiers = ["S", "A", "B", "C", "D"]
 
@@ -22,6 +30,16 @@ def index_items():
 
 
 def rich_string(tier: str | None, text: str | None) -> str | None:
+    """
+    Prettifies the text based on item's tier.
+
+    :param tier: Item tier (S, A, B, C, D)
+    :type tier: str | None
+    :param text: Text
+    :type text: str | None
+    :return: Prettified string
+    :rtype: str | None
+    """
     if tier is None or text is None:
         return None
 
@@ -37,6 +55,12 @@ def rich_string(tier: str | None, text: str | None) -> str | None:
 
 
 def export_data() -> str:
+    """
+    Exports the contents of DATA_DIR to EXPORT_DIR.
+
+    :return: Exported zip name
+    :rtype: str
+    """
     EXPORT_DIR = "export"
 
     os.makedirs(EXPORT_DIR, exist_ok=True)
@@ -58,12 +82,26 @@ def export_data() -> str:
 
 
 def img_to_base64(path: str) -> str:
+    """
+    Encodes image to base64 and returns a data URI.
+
+    :param path: Image file path
+    :type path: str
+    :return: Data URI
+    :rtype: str
+    """
     with open(path, "rb") as file:
         encoded = base64.b64encode(file.read()).decode("utf-8")
     return f"data:image/png;base64,{encoded}"
 
 
 def open_html_silent(path: str):
+    """
+    Spawns a subprocess that opens a HTML in the browser without any stdouts.
+
+    :param path: HTML file path
+    :type path: str
+    """
     url = Path(path).resolve().as_uri()
     try:
         subprocess.Popen(

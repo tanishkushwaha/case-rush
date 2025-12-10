@@ -1,3 +1,7 @@
+"""
+CLI for Items Menu and Item Menu.
+"""
+
 from rich import print as rprint
 
 from src.models.item import OwnedItem

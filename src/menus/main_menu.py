@@ -1,3 +1,7 @@
+"""
+CLI for Main Menu.
+"""
+
 from rich import print as rprint
 from datetime import datetime
 from pathlib import Path
@@ -56,12 +60,22 @@ def main_menu():
             rprint("[red]Invalid choice, try again.[/red]")
 
 
+# TODO: Move the functions below to src.utils
 def save_claim_time():
+    """
+    Writes claim time to the DATA_DIR/last_claim.
+    """
     with open("data/last_claim", "w") as file:
         file.write(datetime.now().isoformat())
 
 
 def load_claim_time() -> datetime | None:
+    """
+    Loads claim time from DATA_DIR/last_claim.
+
+    :return: Last claim time
+    :rtype: datetime | None
+    """
     file_path = Path("data/last_claim")
 
     if file_path.exists():

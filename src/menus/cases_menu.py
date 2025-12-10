@@ -1,3 +1,7 @@
+"""
+CLI for Cases Menu and Case Menu.
+"""
+
 import time
 from rich import print as rprint
 
