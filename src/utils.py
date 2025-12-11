@@ -11,6 +11,7 @@ from datetime import datetime
 import base64
 
 from src.models.item import Item
+from src.paths import DATA_DIR, EXPORT_DIR, ITEMS_DIR
 
 
 def index_items():
@@ -18,11 +19,10 @@ def index_items():
     Indexes items present in the base_dir to the database.
     """
 
-    base_dir = Path("./data/items")
     tiers = ["S", "A", "B", "C", "D"]
 
     for tier in tiers:
-        for path in [str(item.resolve()) for item in (base_dir / tier).rglob("*")]:
+        for path in [str(item.resolve()) for item in (ITEMS_DIR / tier).rglob("*")]:
             id = f"{tier}{uuid.uuid4().hex[:4]}"
 
             item = Item(id, tier, path)
@@ -61,9 +61,6 @@ def export_data() -> str:
     :return: Exported zip name
     :rtype: str
     """
-    EXPORT_DIR = "export"
-
-    os.makedirs(EXPORT_DIR, exist_ok=True)
 
     output_name = os.path.join(
         EXPORT_DIR, f'export_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.zip'
@@ -110,3 +107,32 @@ def open_html_silent(path: str):
         return True
     except Exception:
         return False
+
+
+def save_claim_time():
+    """
+    Writes claim time to the DATA_DIR/last_claim.
+    """
+
+    with open(DATA_DIR / "last_claim", "w") as file:
+        file.write(datetime.now().isoformat())
+
+
+def load_claim_time() -> datetime | None:
+    """
+    Loads claim time from DATA_DIR/last_claim.
+
+    :return: Last claim time
+    :rtype: datetime | None
+    """
+
+    file_path = Path(DATA_DIR / "last_claim")
+
+    if file_path.exists():
+        try:
+            with open(file_path, "r") as file:
+                iso_str = file.read()
+                return datetime.fromisoformat(iso_str)
+
+        except Exception:
+            return None

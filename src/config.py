@@ -6,7 +6,19 @@ from typing import Any, Literal
 import tomli
 import tomli_w
 
-CONFIG_FILE_PATH = "config.toml"
+from src.paths import CONFIG_DIR
+
+CONFIG_FILE_PATH = CONFIG_DIR / "config.toml"
+DEFAULT_CONFIG: dict[str, Any] = {
+    "drop_rates": {
+        "legendary": 0.02,
+        "epic": 0.06,
+        "rare": 0.12,
+        "uncommon": 0.3,
+        "common": 0.5,
+    },
+    "delays": {"case_opening": 5, "claim_cooldown": 3600},
+}
 
 
 class Config:
@@ -15,8 +27,14 @@ class Config:
     @classmethod
     def _load(cls) -> Any:
         if cls._data is None:
-            with open(CONFIG_FILE_PATH, "rb") as file:
-                cls._data = tomli.load(file)
+            # Add a try catch here
+            try:
+                with open(CONFIG_FILE_PATH, "rb") as file:
+                    cls._data = tomli.load(file)
+            except FileNotFoundError:
+                cls.reset()
+                with open(CONFIG_FILE_PATH, "rb") as file:
+                    cls._data = tomli.load(file)
 
         return cls._data
 
@@ -34,16 +52,5 @@ class Config:
 
     @staticmethod
     def reset():
-        default_config: dict[str, Any] = {
-            "drop_rates": {
-                "legendary": 0.02,
-                "epic": 0.06,
-                "rare": 0.12,
-                "uncommon": 0.3,
-                "common": 0.5,
-            },
-            "delays": {"case_opening": 5, "claim_cooldown": 3600},
-        }
-
         with open(CONFIG_FILE_PATH, "wb") as file:
-            tomli_w.dump(default_config, file)
+            tomli_w.dump(DEFAULT_CONFIG, file)

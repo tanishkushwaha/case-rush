@@ -5,6 +5,8 @@ Provides a Database class for seeding and connecting to the database.
 import sqlite3
 from typing import Tuple
 
+from src.paths import DATA_DIR
+
 
 class Database:
     _connection: sqlite3.Connection | None = None
@@ -13,7 +15,7 @@ class Database:
     @classmethod
     def connect(cls) -> Tuple[sqlite3.Cursor, sqlite3.Connection]:
         if cls._connection is None:
-            cls._connection = sqlite3.connect("./data/data.db")
+            cls._connection = sqlite3.connect(DATA_DIR / "data.db")
             cls._cursor = cls._connection.cursor()
 
         if cls._cursor is None:
