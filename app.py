@@ -11,6 +11,9 @@ def main():
         index_items()
         main_menu()
 
+    except IndexError:
+        print("Make sure that rewards exist in the items directory.")
+
     except Exception as e:
         print("Some error occured:", e)
 
