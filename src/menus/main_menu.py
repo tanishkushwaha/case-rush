@@ -4,11 +4,11 @@ CLI for Main Menu.
 
 from rich import print as rprint
 from datetime import datetime
-from pathlib import Path
 import time
 
 from src.models.case import Case
 from src.config import Config
+from src.utils import load_claim_time, save_claim_time
 from .inventory_menu import inventory_menu
 from .settings_menu import settings_menu
 
@@ -17,7 +17,7 @@ def main_menu():
     while True:
         rprint("\n[bold]----- Case Rush -----[/bold]\n")
         rprint("1. Open Inventory")
-        rprint("2. Claim Daily Case")
+        rprint("2. Claim Case")
         rprint("3. Settings")
         rprint("4. Exit")
 
@@ -44,8 +44,8 @@ def main_menu():
                     can_claim = True
 
             if can_claim:
-                save_claim_time()
                 new_case = Case.generate()
+                save_claim_time()
                 rprint(
                     f"[bold green]Successfully claimed[/bold green] [italic]1x Case ({new_case.id})[/italic]"
                 )
@@ -58,31 +58,3 @@ def main_menu():
 
         else:
             rprint("[red]Invalid choice, try again.[/red]")
-
-
-# TODO: Move the functions below to src.utils
-def save_claim_time():
-    """
-    Writes claim time to the DATA_DIR/last_claim.
-    """
-    with open("data/last_claim", "w") as file:
-        file.write(datetime.now().isoformat())
-
-
-def load_claim_time() -> datetime | None:
-    """
-    Loads claim time from DATA_DIR/last_claim.
-
-    :return: Last claim time
-    :rtype: datetime | None
-    """
-    file_path = Path("data/last_claim")
-
-    if file_path.exists():
-        try:
-            with open(file_path, "r") as file:
-                iso_str = file.read()
-                return datetime.fromisoformat(iso_str)
-
-        except Exception:
-            return None
