@@ -8,6 +8,8 @@ from src.utils import export_data
 from src.models import Case, Item, OwnedItem
 from src.config import Config
 from .confirm_menu import confirm_menu
+from .help_menu import help_menu
+from .about_menu import about_menu
 
 
 def settings_menu():
@@ -17,9 +19,11 @@ def settings_menu():
         rprint("2. Import Data")
         rprint("3. Factory Reset")
         rprint("4. Reset Config to default")
-        rprint("5. Go back")
+        rprint("5. Help")
+        rprint("6. About")
+        rprint("7. Go back")
 
-        choice = int(input("\nChoose action (1-5): "))
+        choice = int(input("\nChoose action (1-7): "))
 
         if choice == 1:
             path = export_data()
@@ -54,6 +58,12 @@ def settings_menu():
                 )
 
         elif choice == 5:
+            help_menu()
+
+        elif choice == 6:
+            about_menu()
+
+        elif choice == 7:
             break
 
         else:

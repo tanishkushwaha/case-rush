@@ -1,0 +1,5 @@
+__app_name__ = "Case Rush"
+__version__ = "0.1.0"
+__author__ = "Tanish Kushwaha"
+__email__ = "tanishkushwahatk@gmail.com"
+__copyright__ = "Copyright (c) 2025 Tanish Kushwaha"
