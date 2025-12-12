@@ -23,7 +23,7 @@ def items_menu():
         rprint(f"{owned_items_count + 1}. Open GUI")
         rprint(f"{owned_items_count + 2}. Go back")
 
-        choice = int(input(f"\nChoose action (1-{owned_items_count + 1}): "))
+        choice = int(input(f"\nChoose action (1-{owned_items_count + 2}): "))
 
         if choice > 0 and choice <= owned_items_count:
             owned_item = owned_items[choice - 1]
