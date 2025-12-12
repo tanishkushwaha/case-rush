@@ -2,6 +2,7 @@ from typing import Any
 from jinja2 import Environment, FileSystemLoader
 
 from src.models import OwnedItem
+from src.paths import CACHE_DIR
 from src.utils import img_to_base64, open_html_silent
 
 
@@ -28,7 +29,7 @@ def open_web_inventory() -> bool:
 
     output = template.render(items=items)
 
-    with open("templates/output.html", "w") as f:
+    with open(CACHE_DIR / "inventory.html", "w") as f:
         f.write(output)
 
-    return open_html_silent("templates/output.html")
+    return open_html_silent(str(CACHE_DIR / "inventory.html"))
