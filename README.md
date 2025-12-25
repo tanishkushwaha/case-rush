@@ -28,4 +28,20 @@ pip install -r requirements.txt
 python app.py
 ```
 
+## Uninstall
+
+Delete the following directories:
+
+1. `~/.local/share/case-rush`
+2. `~/.config/case-rush`
+3. `~/.cache/case-rush`
+
+Either manually or by using the following command:
+
+```bash
+rm -rf ~/.local/share/case-rush ~/.config/case-rus ~/.cache/case-rush
+```
+
+**Note:** This command permanently deletes all Case Rush user data and configuration.
+
 ---
