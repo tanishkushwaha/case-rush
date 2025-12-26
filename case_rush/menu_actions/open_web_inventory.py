@@ -1,9 +1,9 @@
 from typing import Any
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, PackageLoader
 
-from src.models import OwnedItem
-from src.paths import CACHE_DIR
-from src.utils import img_to_base64, open_html_silent
+from case_rush.models import OwnedItem
+from case_rush.paths import CACHE_DIR
+from case_rush.utils import img_to_base64, open_html_silent
 
 
 def open_web_inventory() -> bool:
@@ -13,7 +13,7 @@ def open_web_inventory() -> bool:
     :return: Success
     :rtype: bool
     """
-    env = Environment(loader=FileSystemLoader("templates"))
+    env = Environment(loader=PackageLoader("case_rush", "templates"))
 
     template = env.get_template("inventory.html")
 

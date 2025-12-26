@@ -1,0 +1,23 @@
+[project]
+name = "case-rush"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+  "Jinja2==3.1.6",
+  "markdown-it-py==4.0.0",
+  "MarkupSafe==3.0.3",
+  "mdurl==0.1.2",
+  "platformdirs==4.5.1",
+  "Pygments==2.19.2",
+  "rich==14.2.0",
+  "tomli==2.3.0",
+  "tomli_w==1.2.0",
+]
+
+[project.scripts]
+case-rush = "case_rush.app:main"
+
+[tool.setuptools.package-data]
+case_rush = ["templates/*.html"]
+
+

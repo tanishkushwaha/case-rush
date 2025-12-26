@@ -2,7 +2,7 @@
 Provides application info.
 """
 
-import src.__version__ as meta
+import case_rush.__version__ as meta
 
 from rich import print as rprint
 

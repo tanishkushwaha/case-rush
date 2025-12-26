@@ -10,8 +10,8 @@ import zipfile
 from datetime import datetime
 import base64
 
-from src.models.item import Item
-from src.paths import DATA_DIR, EXPORT_DIR, ITEMS_DIR
+from case_rush.models.item import Item
+from case_rush.paths import DATA_DIR, EXPORT_DIR, ITEMS_DIR
 
 
 def index_items():

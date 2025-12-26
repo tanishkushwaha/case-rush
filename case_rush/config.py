@@ -6,7 +6,7 @@ from typing import Any, Literal
 import tomli
 import tomli_w
 
-from src.paths import CONFIG_DIR
+from case_rush.paths import CONFIG_DIR
 
 CONFIG_FILE_PATH = CONFIG_DIR / "config.toml"
 DEFAULT_CONFIG: dict[str, Any] = {

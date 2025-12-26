@@ -4,9 +4,9 @@ CLI for Settings Menu.
 
 from rich import print as rprint
 
-from src.utils import export_data
-from src.models import Case, Item, OwnedItem
-from src.config import Config
+from case_rush.utils import export_data
+from case_rush.models import Case, Item, OwnedItem
+from case_rush.config import Config
 from .confirm_menu import confirm_menu
 from .help_menu import help_menu
 from .about_menu import about_menu

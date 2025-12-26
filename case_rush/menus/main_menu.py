@@ -6,9 +6,9 @@ from rich import print as rprint
 from datetime import datetime
 import time
 
-from src.models.case import Case
-from src.config import Config
-from src.utils import load_claim_time, save_claim_time
+from case_rush.models.case import Case
+from case_rush.config import Config
+from case_rush.utils import load_claim_time, save_claim_time
 from .inventory_menu import inventory_menu
 from .settings_menu import settings_menu
 
@@ -37,7 +37,7 @@ def main_menu():
                 diff = int((datetime.now() - last_claim_time).total_seconds())
                 if diff < cooldown:
                     rprint(
-                        f"You can claim next case in {time.strftime("%Hh %Mm %Ss", time.gmtime(cooldown - diff))}."
+                        f'You can claim next case in {time.strftime("%Hh %Mm %Ss", time.gmtime(cooldown - diff))}.'
                     )
                     can_claim = False
                 else:

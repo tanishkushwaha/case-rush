@@ -4,8 +4,8 @@ CLI for Inventory Menu.
 
 from rich import print as rprint
 
-from src.models.case import Case
-from src.models.item import OwnedItem
+from case_rush.models.case import Case
+from case_rush.models.item import OwnedItem
 from .cases_menu import cases_menu
 from .items_menu import items_menu
 

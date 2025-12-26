@@ -1,9 +1,9 @@
 import random
 from typing import List
 import uuid
-from src.db import Database
-from src.models.item import Item, OwnedItem
-from src.config import Config
+from case_rush.db import Database
+from case_rush.models.item import Item, OwnedItem
+from case_rush.config import Config
 
 cursor, con = Database.connect()
 

@@ -1,6 +1,6 @@
-from src.menus import main_menu
-from src.db import Database
-from src.utils import index_items
+from case_rush.menus import main_menu
+from case_rush.db import Database
+from case_rush.utils import index_items
 
 
 def main():

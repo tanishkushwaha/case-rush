@@ -5,9 +5,9 @@ CLI for Cases Menu and Case Menu.
 import time
 from rich import print as rprint
 
-from src.config import Config
-from src.models.case import Case
-from src.utils import rich_string
+from case_rush.config import Config
+from case_rush.models.case import Case
+from case_rush.utils import rich_string
 from .confirm_menu import confirm_menu
 
 

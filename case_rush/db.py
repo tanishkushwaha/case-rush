@@ -5,7 +5,7 @@ Provides a Database class for seeding and connecting to the database.
 import sqlite3
 from typing import Tuple
 
-from src.paths import DATA_DIR
+from case_rush.paths import DATA_DIR
 
 
 class Database:

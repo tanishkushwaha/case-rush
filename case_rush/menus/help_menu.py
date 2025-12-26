@@ -4,7 +4,7 @@ Provides help info for the app.
 
 from rich import print as rprint
 
-from src.paths import CONFIG_DIR, ITEMS_DIR
+from case_rush.paths import CONFIG_DIR, ITEMS_DIR
 
 
 def help_menu():

@@ -4,9 +4,9 @@ CLI for Items Menu and Item Menu.
 
 from rich import print as rprint
 
-from src.models.item import OwnedItem
-from src.utils import rich_string
-from src.menu_actions import open_web_inventory
+from case_rush.models.item import OwnedItem
+from case_rush.utils import rich_string
+from case_rush.menu_actions import open_web_inventory
 from .confirm_menu import confirm_menu
 
 
