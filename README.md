@@ -45,7 +45,7 @@ Make sure you have Python 3.10+ installed.
    rm -rf ~/.local/share/case-rush ~/.config/case-rush ~/.cache/case-rush
    ```
 
-**Note:** This command permanently deletes all Case Rush user data and configuration.
+> **Note:** This command permanently deletes all Case Rush user data and configuration.
 
 ## Development
 
@@ -105,6 +105,8 @@ D: Common
 
 Paste your reward image files in those sub directories based on their corresponding tiers and restart the application.
 
+> For reference, an `example-rewards.zip` file is included in the repository.
+
 ### Import & Export Data (Player Progress)
 
 #### Export
@@ -139,6 +141,6 @@ claim_cooldown = 3600  # seconds
 
 ```
 
-**Note:** The drop rates must add up exactly to 1.
+> **Note:** The drop rates must add up exactly to 1.
 
 After making changes to the config file, restart the application for them to take effect.
