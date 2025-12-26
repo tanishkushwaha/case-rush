@@ -1,22 +1,24 @@
 # Case Rush
 
-A lightweight lootbox simulator game with custom tier-based rewards.
+A lightweight gacha lootbox game with custom tier-based rewards.
 
 ## Installation
 
 Make sure you have Python 3.10+ installed.
 
-1. Install `pipx` for global isolated installation.
+1. Clone the repo and `cd` into it.
+
+   ```bash
+   git clone https://github.com/tanishkushwaha/case-rush.git
+
+   cd case-rush
+   ```
+
+2. Install `pipx` for global isolated installation.
 
    ```bash
    sudo apt install pipx
    pipx ensurepath
-   ```
-
-2. `cd` into the root directory.
-
-   ```bash
-   cd case-rush
    ```
 
 3. Run the following command for the installation.
